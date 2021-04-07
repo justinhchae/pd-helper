@@ -8,7 +8,7 @@ setup(
   author = 'Justin Chae',
   author_email = 'justin@chaemail.com',
   url = 'https://github.com/justinhchae/pd-helper',
-  download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/justinhchae/pd-helper/archive/refs/tags/v0.0.1-beta.tar.gz',  
   keywords = ['pandas', 'dataframe', 'optimization'],
   install_requires=[
           'pandas',
