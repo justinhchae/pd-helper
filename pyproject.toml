@@ -1,0 +1,10 @@
+[build-system]
+requires = [
+    "pandas",
+    "numpy",
+    "tqdm",
+    "multiprocessing",
+    "functools",
+    "logging"
+]
+build-backend = "setuptools.build_meta"

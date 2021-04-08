@@ -1,13 +1,11 @@
-import pandas as pd
-import numpy as np
 import multiprocessing as mp
 from tqdm import tqdm
 from functools import partial
 import logging
 
-from pd_helper.utils._parse_cols import _parse_cols
-from pd_helper.utils._mem_usage import _mem_usage
-from pd_helper.utils._reduce_precision import _reduce_precision
+from src.pd_helper import _parse_cols
+from src.pd_helper.utils._mem_usage import _mem_usage
+from src.pd_helper import _reduce_precision
 
 
 def optimize(df
