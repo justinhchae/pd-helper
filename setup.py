@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='pd_helper',
-    version='0.0.3',
+    version='0.0.4',
     author='Justin Chae',
     author_email='justin@chaemail.com',
     description = 'A helpful script to optimize a Pandas DataFrame.',
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/justinhchae/pd-helper",
     project_urls={
-        "Download URL": "https://github.com/justinhchae/pd-helper/archive/refs/tags/v0.0.2-beta.tar.gz",
+        "Download URL": "https://github.com/justinhchae/pd-helper/archive/refs/tags/v0.0.3-beta.tar.gz",
     },
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -25,5 +25,5 @@ setuptools.setup(
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
-    python_requires=">=3.8",
+    python_requires=">=3.7",
 )
