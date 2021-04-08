@@ -2,6 +2,7 @@ import multiprocessing as mp
 from tqdm import tqdm
 from functools import partial
 import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 from pd_helper.utils._mem_usage import _mem_usage
 from pd_helper.utils._parse_cols import _parse_cols
@@ -10,7 +11,7 @@ from pd_helper.utils._reduce_precision import _reduce_precision
 
 def optimize(df
              , parse_col_names=True
-             , enable_mp=True
+             , enable_mp=False
              , mp_processors=None
              , date_strings=None
              , exclude_cols=None
@@ -25,7 +26,22 @@ def optimize(df
     :args: Consumes a dataframe, returns an optimized dataframe.
     :params df: a pandas dataframe that needs optimization
     :params parse_col_names: Default to True; returns columns as lower case without spaces
-    :params enable_mp: Default to True; runs optimization on columns in parallel. Set to false to run in series.
+    :params enable_mp: Default to False. If True, runs optimization on columns in parallel.
+    :params mp_processors: If None, default to half of available processes, only effective if mp is enabled.
+
+    *Note when calling function with multiprocessing enabled, ensure that the function is called from a module such as:
+
+    do this:
+
+    if __name__ == "__main__":
+        df = pd.DataFrame(<Some data here>)
+        df = optimize(df)
+
+    not this:
+
+    df = pd.DataFrame(<Some data here>)
+    df = optimize(df)
+
     :params date_strings: If None, default to a list of strings that indicate date columns -> ['_date', 'date_']
     :params exclude_cols: Default to None. A list of strings that indicate columns to exclude
     :params special_mappings: Default to None.
@@ -41,8 +57,8 @@ def optimize(df
     :params echo: Default to True, echo progress.
     """
     if echo:
-        logging.info('Logging enabled for optimizer, set echo to False to hide informational messages.')
-        logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.info('Logging enabled by default. Toggle option to be released later to turn off echo.')
+
     start_mem = _mem_usage(df)
     logging.info(f'Starting DataFrame Optimization. Starting with {start_mem} memory.')
     if parse_col_names:
@@ -99,7 +115,9 @@ def optimize(df
             df[col_name] = col_series
     else:
         logging.info('Starting optimization process in series.')
-        # un comment below to do conversion without MP
+        logging.info('Optimization can be run in parallel with multiprocessing'
+                     ', set enable_mp to True and see function params.')
+
         df[cols_to_convert] = df[cols_to_convert].apply(lambda x: _reduce_precision(x
                                                                                     , date_strings=date_strings
                                                                                     , bool_types=bool_types
