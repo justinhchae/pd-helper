@@ -23,6 +23,22 @@ if __name__ == "__main__":
    df = optimize(df, enable_mp=True)
 ```
 
+## Specify Special Mappings
+```python
+from pd_helper.helper import optimize
+
+if __name__ == "__main__":
+   # some DataFrame, df
+   special_mappings = {'string': ['col_1', 'col_2'],
+                       'category': ['col_3', 'col_4']}
+   
+   # special mappings will be applied instead of by optimize ruleset, they will be returned.
+   df = optimize(df
+                 , enable_mp=True,
+                 special_mappings=special_mappings
+                 )
+```
+
  
 ## Install
  ```bash
