@@ -1,3 +1,4 @@
+import pandas as pd
 import multiprocessing as mp
 from tqdm import tqdm
 from functools import partial
@@ -41,8 +42,8 @@ def optimize(df
         If None, default to a list of strings that indicate columns to exclude from optimization -> ['exclude_this_col', 'exclude_another_col'].
         Note, excluded columns are returned, just not run through the optimizer.
     special_mappings: dictionary of {string: list of strings}, default to None
-        Optional. If provided indicate a special mapping for col types with a dictionary.
-        Note, the key is the desired dtype and the value is a list of column names
+        Optional. If provided indicate a special mapping for col types with a dictionary, these are excluded from auto optimization.
+        Note, the key is the desired dtype and the value is a list of column names.
     bool_types: list of string, default to None
         If None, default to a list of bool and semantic string values that indicate there is a boolean dtype such
         as True False, etc. -> [True, False, 'true', 'True', 'False', 'false']
@@ -81,11 +82,26 @@ def optimize(df
     # make a list of strings from all available dataframe columns
     cols_to_convert = [i for i in df.columns]
     # accommodate any special user-defined mappings
+
+    def f(s, c):
+        """
+        A Helper Function to assigning special mappings
+        :param s: Pandas Series
+        :param c: String
+        :return: Pandas Series
+        """
+        if c == 'category':
+            s = pd.Categorical(s)
+        elif c == 'datetime':
+            s = pd.to_datetime(s)
+        else:
+            s = s.astype(c)
+        return s
     special_exclusions = []
     if special_mappings is not None:
         for k, v in special_mappings.items():
             for i in v:
-                df[i] = df[i].astype(k)
+                df[i] = f(df[i], k)
                 special_exclusions.append(i)
 
     # exclude columns if a list is provided
