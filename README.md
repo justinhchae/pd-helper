@@ -12,8 +12,10 @@
  ```python3
  from pd_helper.helper import optmize
  
- # some DataFrame, df
- df = optimize(df)
+ if __name__ == "__main__":
+    # guading function under module is necessary to run multiprocessing (save time).
+    # some DataFrame, df
+    df = optimize(df)
  ```
  
  ## Install
