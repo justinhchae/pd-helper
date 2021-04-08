@@ -69,8 +69,11 @@ Ending with 65.33 MB memory.
 ## Generating a Randomly Imperfect DataFrame with Maker
 
  Maker provides a class, MakeData(), to generate a table of made-up records. 
+ 
  Each row is an event where an item was retrieved. 
+ 
  Options to make the table imperfectly random in various ways. 
+ 
  Sample table below:
 
 |  | Retrieved Date  | Item Name | Retrieved | Condition | Sector |
