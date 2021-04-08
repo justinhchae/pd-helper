@@ -10,12 +10,12 @@
  
  Given a pandas dataframe, "df":
  ```python3
- from pd_helper.helper import optmize
- 
- if __name__ == "__main__":
-    # guading function under module is necessary to run multiprocessing (save time).
-    # some DataFrame, df
-    df = optimize(df)
+from pd_helper.helper import optimize
+
+if __name__ == "__main__":
+   # guarding function under module is necessary to run multiprocessing (save time).
+   # some DataFrame, df
+   df = optimize(df)
  ```
  
 ## Install
@@ -32,3 +32,12 @@ After optmization.
 
 Ending with 65.33 MB memory.
 ```
+
+
+### TODO
+
+* Improve efficiency of iterating on DataFrame.
+
+* Allow user to toggle logging.
+
+* Provide tools for imputing missing data.
