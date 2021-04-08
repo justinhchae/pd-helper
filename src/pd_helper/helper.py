@@ -19,6 +19,7 @@ def optimize(df
              , categorical_ratio=.1
              , categorical_threshold=20
              , final_default_dtype='string'
+             , echo=True
              ):
     """
     :args: Consumes a dataframe, returns an optimized dataframe.
@@ -37,7 +38,11 @@ def optimize(df
     :params categorical_threshold: If None, default to 20. If the number of unique values is less than 20
             , make it a categorical column.
     :params final_default_dtype: If None, default to "string" dtype.
+    :params echo: Default to True, echo progress.
     """
+    if echo:
+        logging.info('Logging enabled for optimizer, set echo to False to hide informational messages.')
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     start_mem = _mem_usage(df)
     logging.info(f'Starting DataFrame Optimization. Starting with {start_mem} memory.')
     if parse_col_names:
