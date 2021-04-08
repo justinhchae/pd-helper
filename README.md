@@ -18,7 +18,17 @@
     df = optimize(df)
  ```
  
- ## Install
+## Install
  ```bash
  pip install pd-helper
  ```
+
+## Sample Results
+
+```bash
+Starting with 175.63 MB memory.
+
+After optmization. 
+
+Ending with 65.33 MB memory.
+```
