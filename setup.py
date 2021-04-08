@@ -15,6 +15,13 @@ setuptools.setup(
     project_urls={
         "Download URL": "https://github.com/justinhchae/pd-helper/archive/refs/tags/v0.0.4-beta.tar.gz",
     },
+    install_requires=[
+          'pandas',
+          'numpy',
+          'tqdm',
+          'multiprocessing',
+          'logging'
+      ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
