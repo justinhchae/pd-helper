@@ -1,4 +1,3 @@
-
 def _parse_cols(df):
     # logging.info('Parsing column headers to lower case and replacing spaces with underscore.')
     df.columns = map(str.lower, df.columns)
