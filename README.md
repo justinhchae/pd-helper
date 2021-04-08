@@ -10,7 +10,7 @@
  
  Given a pandas dataframe, "df":
  ```python3
- from pd_helper.helper import optmize
+ from pd_helper.helper import optimize
  
  if __name__ == "__main__":
     # guading function under module is necessary to run multiprocessing (save time).
