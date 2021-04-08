@@ -57,8 +57,18 @@ def _reduce_precision(x
             pass
 
     elif any(i in bool_types for i in unique_data):
-        # make bool types as boolean instead of bool to allow for nullable bools
+        unique_vals = x.unique().tolist()
+
+        blank_char = ''
+        blank_space = ' '
+
+        if blank_char in unique_vals:
+            x = x.replace({blank_char: pd.NA})
+        if blank_space in unique_vals:
+            x = x.replace({blank_space: pd.NA})
+
         x = x.astype('boolean')
+
 
     elif cat_ratio < categorical_ratio or n_unique < categorical_threshold:
         # if the category ratio is smaller than default thresholds, then make the column a categorical
