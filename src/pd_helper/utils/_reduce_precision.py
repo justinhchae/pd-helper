@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+
 def _reduce_precision(x
                       , date_strings
                       , bool_types
