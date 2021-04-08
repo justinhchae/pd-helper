@@ -6,17 +6,23 @@
  
  Auto configure dtypes for appropriate data types in each column. 
 
-## Basic Usage
- 
- Given a pandas dataframe, "df":
- ```python3
+## Basic Usage to Iterate over DataFrame
+```python
 from pd_helper.helper import optimize
 
 if __name__ == "__main__":
-   # guarding function under module is necessary to run multiprocessing (save time).
    # some DataFrame, df
    df = optimize(df)
- ```
+```
+## Better Usage With Multiprocessing
+```python
+from pd_helper.helper import optimize
+
+if __name__ == "__main__":
+   # some DataFrame, df
+   df = optimize(df, enable_mp=True)
+```
+
  
 ## Install
  ```bash
