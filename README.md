@@ -56,7 +56,7 @@ if __name__ == "__main__":
 ```
 
 
-## Sample Results
+## Sample Results with Helper
 
 ```bash
 Starting with 175.63 MB memory.
@@ -66,9 +66,9 @@ After optmization.
 Ending with 65.33 MB memory.
 ```
 
-## Maker
+## Generating a Randomly Imperfect DataFrame with Maker
 
- Maker provides a class to generate a table of made-up records. 
+ Maker provides a class, MakeData(), to generate a table of made-up records. 
  Each row is an event where an item was retrieved. 
  Options to make the table imperfectly random in various ways. 
  Sample table below:
