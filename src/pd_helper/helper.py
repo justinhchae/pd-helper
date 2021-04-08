@@ -3,9 +3,9 @@ from tqdm import tqdm
 from functools import partial
 import logging
 
-from pd_helper.utils import _parse_cols
-from pd_helper.utils import _mem_usage
-from pd_helper.utils import _reduce_precision
+from pd_helper.utils._mem_usage import _mem_usage
+from pd_helper.utils._parse_cols import _parse_cols
+from pd_helper.utils._reduce_precicison import _reduce_precision
 
 
 def optimize(df
@@ -106,9 +106,8 @@ def optimize(df
 
     logging.info(f'Converted DF with new dtypes as follows:\n{df.dtypes}')
     end_mem = _mem_usage(df)
-    mem_delta = start_mem - end_mem
     pct_saving = (mem_delta / start_mem) * 100
-    logging.info(f'Completed DataFrame Optimization. Ending with {end_mem} memory, saving {pct_saving}%.')
+    logging.info(f'Completed DataFrame Optimization. Ending with {end_mem} memory.')
 
     return df
 
