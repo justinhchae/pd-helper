@@ -6,31 +6,45 @@
  
  Auto configure dtypes for appropriate data types in each column. 
 
+## Install
+ ```bash
+ pip install pd-helper
+ ```
+
 ## Basic Usage to Iterate over DataFrame
 ```python
+from pd_helper.maker import MakeData 
 from pd_helper.helper import optimize
+faker = MakeData()
 
 if __name__ == "__main__":
-   # some DataFrame, df
+   # MakeData() generates a fake dataframe, convenient for testing
+   df = faker.make_df()
    df = optimize(df)
 ```
 ## Better Usage With Multiprocessing
 ```python
+from pd_helper.maker import MakeData 
 from pd_helper.helper import optimize
+faker = MakeData()
 
 if __name__ == "__main__":
-   # some DataFrame, df
+   # MakeData() generates a fake dataframe, convenient for testing
+   df = faker.make_df()
    df = optimize(df, enable_mp=True)
 ```
 
 ## Specify Special Mappings
 ```python
+from pd_helper.maker import MakeData 
 from pd_helper.helper import optimize
+faker = MakeData()
 
 if __name__ == "__main__":
-   # some DataFrame, df
-   special_mappings = {'string': ['col_1', 'col_2'],
-                       'category': ['col_3', 'col_4']}
+   # MakeData() generates a fake dataframe, convenient for testing
+   df = faker.make_df()
+   special_mappings = {'string': ['object_id'],
+                       'category': ['item_name']}
    
    # special mappings will be applied instead of by optimize ruleset, they will be returned.
    df = optimize(df
@@ -39,11 +53,6 @@ if __name__ == "__main__":
                  )
 ```
 
- 
-## Install
- ```bash
- pip install pd-helper
- ```
 
 ## Sample Results
 
