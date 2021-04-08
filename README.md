@@ -66,6 +66,28 @@ After optmization.
 Ending with 65.33 MB memory.
 ```
 
+## Maker
+
+ Maker provides a class to generate a table of made-up records. 
+ Each row is an event where an item was retrieved. 
+ Options to make the table imperfectly random in various ways. 
+ Sample table below:
+
+|  | Retrieved Date  | Item Name | Retrieved | Condition | Sector |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Example | 2019-01-01, 2019-03-4  | Toaster, Lighter  | True, False  | Junk, Excellent  | 1, 2 |
+| Data Type | String  | String  | String  | String | Integer |
+
+
+## References
+
+* Pandas Categorical: <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html>
+
+* Pandas Pickle: <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_pickle.html>
+
+* Pandas CSV: <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html>
+
+* Pandas Datetime: <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html>
 
 ### TODO
 
