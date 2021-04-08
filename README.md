@@ -4,9 +4,9 @@
  
  Save 50-75% on DataFrame memory usage by running the optimizer. 
  
- Auto configure dtypes for appropriate data types in each column with helper.
+ Autoconfigure dtypes for appropriate data types in each column with **helper**.
 
- Generate a random DataFrame of controled random variables for testing with maker.
+ Generate a random DataFrame of controlled random variables for testing with **maker**.
 
 ## Install
  ```bash
