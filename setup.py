@@ -13,14 +13,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/justinhchae/pd-helper",
     project_urls={
-        "Download URL": "https://github.com/justinhchae/pd-helper/archive/refs/tags/v0.0.6-beta.tar.gz",
+        "Download URL": "https://github.com/justinhchae/pd-helper/archive/refs/tags/v0.0.7-beta.tar.gz",
     },
-    install_requires=[
-          'pandas',
-          'numpy',
-          'tqdm',
-          'logging'
-      ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
