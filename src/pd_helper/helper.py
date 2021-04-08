@@ -23,38 +23,48 @@ def optimize(df
              , echo=True
              ):
     """
-    :args: Consumes a dataframe, returns an optimized dataframe.
-    :params df: a pandas dataframe that needs optimization
-    :params parse_col_names: Default to True; returns columns as lower case without spaces
-    :params enable_mp: Default to False. If True, runs optimization on columns in parallel.
-    :params mp_processors: If None, default to half of available processes, only effective if mp is enabled.
+    Optimize a Pandas DataFrame by applying least precision to column dtypes.
+
+    :params
+    ----------
+    df: DataFrame, Required
+        a pandas dataframe that needs optimization
+    parse_col_names: bool, default True
+        If passed, returns columns as lower case without spaces
+    enable_mp: bool, default to False
+        If passed, runs optimization on columns in parallel with multiprocessing
+    mp_processors: integer, default to None
+        If None, default to half of available processes from mp.cpu_count(), only effective if mp is enabled.
+    date_strings: list of string, default to None
+        If None, default to a list of strings that indicate date columns -> ['_date', 'date_']
+    exclude_cols: list of string, default to None
+        If None, default to a list of strings that indicate columns to exclude from optimization -> ['exclude_this_col', 'exclude_another_col'].
+        Note, excluded columns are returned, just not run through the optimizer.
+    special_mappings: dictionary of {string: list of strings}, default to None
+        Optional. If provided indicate a special mapping for col types with a dictionary.
+        Note, the key is the desired dtype and the value is a list of column names
+    bool_types: list of string, default to None
+        If None, default to a list of bool and semantic string values that indicate there is a boolean dtype such
+        as True False, etc. -> [True, False, 'true', 'True', 'False', 'false']
+    categorical_ratio: float, default to None
+        If None, default to .1 (10%). Evaluates the ratio of unique values in the column to determine if categorical dtype is worthwhile.
+        Note, if cat ratio less than 10%, then, the column is assigned categorical.
+    categorical_threshold: integer, default to None
+        If None, default to 20. Evaluates the len() of unique values in a column to determine if categorical dtype is worthwhile.
+        Note, if the number of unique values is less than 20, categorical dtype is assigned.
+    final_default_dtype: string, default to None
+        If None, default to "string" dtype. This is the catch all dtype to assign if optimizer does not assign one by rule.
+    echo: bool, default to True
+        If True, echo progress.
+        Note, this feature currently cannot be toggled through function signature.
 
     *Note when calling function with multiprocessing enabled, ensure that the function is called from a module such as:
 
-    do this:
+        if __name__ == "__main__":
+            df = pd.DataFrame(<Some data here>)
 
-    if __name__ == "__main__":
-        df = pd.DataFrame(<Some data here>)
-        df = optimize(df)
+            df = optimize(df)
 
-    not this:
-
-    df = pd.DataFrame(<Some data here>)
-    df = optimize(df)
-
-    :params date_strings: If None, default to a list of strings that indicate date columns -> ['_date', 'date_']
-    :params exclude_cols: Default to None. A list of strings that indicate columns to exclude
-    :params special_mappings: Default to None.
-            A dictionary where each key is the desired dtype and the value are a list of strings that indicate columns
-            to make that dtype.
-    :params bool_types: If None, default to a list of values that indicate there is a boolean dtype such
-            as True False, etc. -> [True, False, 'true', 'True', 'False', 'false']
-    :params categorical_ratio: If None, default to .1 (10%). Evaluates the ratio of unique values in the column
-            , if less than 10%, then, categorical.
-    :params categorical_threshold: If None, default to 20. If the number of unique values is less than 20
-            , make it a categorical column.
-    :params final_default_dtype: If None, default to "string" dtype.
-    :params echo: Default to True, echo progress.
     """
     if echo:
         logging.info('Logging enabled by default. Toggle option to be released later to turn off echo.')
