@@ -1,10 +1,6 @@
 [build-system]
 requires = [
-    "pandas",
-    "numpy",
-    "tqdm",
-    "multiprocessing",
-    "functools",
-    "logging"
+    "setuptools>=42",
+    "wheel"
 ]
 build-backend = "setuptools.build_meta"
