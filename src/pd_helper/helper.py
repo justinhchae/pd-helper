@@ -3,9 +3,9 @@ from tqdm import tqdm
 from functools import partial
 import logging
 
-from utils import _parse_cols
-from utils import _mem_usage
-from utils import _reduce_precision
+from pd_helper.utils import _parse_cols
+from pd_helper.utils import _mem_usage
+from pd_helper.utils import _reduce_precision
 
 
 def optimize(df
