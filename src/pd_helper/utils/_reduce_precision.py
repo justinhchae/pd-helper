@@ -51,7 +51,7 @@ def _reduce_precision(x
     elif 'datetime' in col_type.name or any(i in str(x.name).lower() for i in date_strings):
         # if datetime, make it datetime or if the col name matches default date strings
         try:
-            x = pd.to_datetime(x)
+            x = pd.to_datetime(x, errors='coerce')
         except:
             # TODO: conform to PEP and avoid naked except statement
             pass

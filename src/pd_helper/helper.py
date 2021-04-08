@@ -90,14 +90,17 @@ def optimize(df
         :param c: String
         :return: Pandas Series
         """
+        logging.info(f'Applying special mappings for {c}')
         if c == 'category':
             s = pd.Categorical(s)
         elif c == 'datetime':
-            s = pd.to_datetime(s)
+            s = pd.to_datetime(s, errors='coerce')
         else:
             s = s.astype(c)
         return s
+
     special_exclusions = []
+
     if special_mappings is not None:
         for k, v in special_mappings.items():
             for i in v:
