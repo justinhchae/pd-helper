@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='pd_helper',
-    version='0.0.8',
+    version='0.0.7',
     author='Justin Chae',
     author_email='justin@chaemail.com',
     description = 'A helpful script to optimize a Pandas DataFrame.',
