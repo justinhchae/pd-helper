@@ -3,12 +3,12 @@ import multiprocessing as mp
 from tqdm import tqdm
 from functools import partial
 import logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
 
 from pd_helper.utils._mem_usage import _mem_usage
 from pd_helper.utils._parse_cols import _parse_cols
 from pd_helper.utils._reduce_precision import _reduce_precision
-
+from pd_helper.utils._configuration import _configuration
 
 def optimize(df
              , parse_col_names=True
@@ -21,7 +21,7 @@ def optimize(df
              , categorical_ratio=.1
              , categorical_threshold=20
              , final_default_dtype='string'
-             , echo=True
+             , echo=False
              ):
     """
     Optimize a Pandas DataFrame by applying least precision to column dtypes.
@@ -55,9 +55,8 @@ def optimize(df
         Note, if the number of unique values is less than 20, categorical dtype is assigned.
     final_default_dtype: string, default to None
         If None, default to "string" dtype. This is the catch all dtype to assign if optimizer does not assign one by rule.
-    echo: bool, default to True
-        If True, echo progress.
-        Note, this feature currently cannot be toggled through function signature.
+    echo: bool, default to False.
+        If True, echo progress, show progress, and display metrics.
 
     *Note when calling function with multiprocessing enabled, ensure that the function is called from a module such as:
 
@@ -67,10 +66,10 @@ def optimize(df
             df = optimize(df)
 
     """
-    if echo:
-        logging.info('Logging enabled by default. Toggle option to be released later to turn off echo.')
+    _configuration(echo=echo)
 
     start_mem = _mem_usage(df)
+
     logging.info(f'Starting DataFrame Optimization. Starting with {start_mem} memory.')
     if parse_col_names:
         logging.info('Converting Column Names to Lower Case and Removing Spaces')
@@ -126,7 +125,14 @@ def optimize(df
         lst_of_series = [df[d] for d in cols_to_convert]
 
         pool = mp.Pool(CPUs)
-        pbar = tqdm(lst_of_series, desc='Running DataFrame Optimization with multiprocessing')
+
+        if echo:
+            # run with progress bar in terminal
+            pbar = tqdm(lst_of_series, desc='Running DataFrame Optimization with multiprocessing')
+        else:
+            # use the same pbar object but iterate over a list with no progress bar
+            pbar = lst_of_series
+
         _reduce_precision_ = partial(_reduce_precision
                                      , date_strings=date_strings
                                      , bool_types=bool_types
