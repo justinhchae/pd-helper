@@ -19,6 +19,7 @@ class MakeData:
 
     def make_random_dates(self, start, end, n):
         """
+        Return random dates to populate datetime columns.
 
         :param start: A string date like '2010-01-01', should be less than end date
         :param end: A string date like '2020-01-01', should be greater than start date
@@ -35,6 +36,8 @@ class MakeData:
 
     def make_df(self, make_default=True, perfect=False, size=100000, col_names=None, values=None):
         """
+        Generate randomly imperfect DataFrame for testing things with some controlled parameters.
+        
         :param make_default: make a Pandas Dataframe of imperfect data types
         :param perfect: no purposeful mistakes in data
         :param size: number of rows in dataframe

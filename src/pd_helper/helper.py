@@ -10,6 +10,7 @@ from pd_helper.utils._parse_cols import _parse_cols
 from pd_helper.utils._reduce_precision import _reduce_precision
 from pd_helper.utils._configuration import _configuration
 
+
 def optimize(df
              , parse_col_names=True
              , enable_mp=False
