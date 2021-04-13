@@ -118,6 +118,8 @@ def optimize(df
         # TODO: account for only T or only F or 1/0 situations
     if mp_processors is None:
         CPUs = mp.cpu_count() // 2
+    else:
+        CPUs = mp_processors
     # by default, enable multiprocessing to run optimizations in parallel
     if enable_mp:
         logging.info('Starting optimization process with multiprocessor.')

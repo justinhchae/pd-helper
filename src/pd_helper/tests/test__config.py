@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from functools import partial
 
 
 class BigDF:
@@ -17,3 +18,28 @@ class BigDF:
     def a_dataframe(self):
         df = pd.DataFrame(self.data, index=list(range(self.num_rows)))
         return df
+
+
+class FakeDF:
+    def __init__(self):
+        from src.pd_helper.maker import MakeData
+        from src.pd_helper.utils._reduce_precision import _reduce_precision
+        faker = MakeData()
+        self.df = faker.make_df()
+
+        # function params currently passed by parent by default
+        date_strings = ['_date', 'date_']
+        bool_types = [True, False, 'true', 'True', 'False', 'false']
+        categorical_ratio = .1
+        categorical_threshold = 20
+        final_default_dtype = 'string'
+        enable_mp = False
+
+        self._reduce_precision_ = partial(_reduce_precision
+                                          , date_strings=date_strings
+                                          , bool_types=bool_types
+                                          , categorical_ratio=categorical_ratio
+                                          , categorical_threshold=categorical_threshold
+                                          , final_default_dtype=final_default_dtype
+                                          , enable_mp=enable_mp
+                                          )
