@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 def _configuration(echo=False):
     """Runs configuration for logging.
     """

@@ -69,7 +69,6 @@ def _reduce_precision(x
 
         x = x.astype('boolean')
 
-
     elif cat_ratio < categorical_ratio or n_unique < categorical_threshold:
         # if the category ratio is smaller than default thresholds, then make the column a categorical
         # a high level attempt to strike a balance when making columns categorical or not
