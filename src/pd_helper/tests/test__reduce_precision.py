@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-import pandas as pd
 
 class Test(TestCase):
+
     from src.pd_helper.maker import MakeData
     from src.pd_helper.utils._reduce_precision import _reduce_precision
     faker = MakeData()
