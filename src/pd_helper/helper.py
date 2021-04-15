@@ -119,6 +119,15 @@ def optimize(df
         CPUs = mp.cpu_count() // 2
     else:
         CPUs = mp_processors
+    # freeze function params
+    _reduce_precision_ = partial(_reduce_precision
+                                 , date_strings=date_strings
+                                 , bool_types=bool_types
+                                 , categorical_ratio=categorical_ratio
+                                 , categorical_threshold=categorical_threshold
+                                 , final_default_dtype=final_default_dtype
+                                 , enable_mp=enable_mp
+                                 )
     # by default, enable multiprocessing to run optimizations in parallel
     if enable_mp:
         logging.info('Starting optimization process with multiprocessor.')
@@ -134,14 +143,6 @@ def optimize(df
             # use the same pbar object but iterate over a list with no progress bar
             pbar = lst_of_series
 
-        _reduce_precision_ = partial(_reduce_precision
-                                     , date_strings=date_strings
-                                     , bool_types=bool_types
-                                     , categorical_ratio=categorical_ratio
-                                     , categorical_threshold=categorical_threshold
-                                     , final_default_dtype=final_default_dtype
-                                     , enable_mp=enable_mp
-                                     )
         list_of_converted = list(pool.imap(_reduce_precision_, pbar))
         pool.close()
         pool.join()
@@ -154,14 +155,6 @@ def optimize(df
         logging.info('Optimization can be run in parallel with multiprocessing'
                      ', set enable_mp to True and see function params.')
         df[cols_to_convert] = df[cols_to_convert].apply(lambda x: _reduce_precision_(x))
-        # df[cols_to_convert] = df[cols_to_convert].apply(lambda x: _reduce_precision(x
-        #                                                                             , date_strings=date_strings
-        #                                                                             , bool_types=bool_types
-        #                                                                             , categorical_ratio=categorical_ratio
-        #                                                                             , categorical_threshold=categorical_threshold
-        #                                                                             , final_default_dtype=final_default_dtype
-        #                                                                             , enable_mp=enable_mp
-        #                                                                             ))
 
     logging.info(f'Converted DF with new dtypes as follows:\n{df.dtypes}')
     end_mem = _mem_usage(df)
