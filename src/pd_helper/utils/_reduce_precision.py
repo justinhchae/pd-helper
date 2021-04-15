@@ -10,8 +10,9 @@ def _reduce_precision(x
                       , final_default_dtype
                       , enable_mp
                       ):
-    """
-    :params x: a pandas series (a column) to convert for dtype precision reduction
+    """A helper function that executes the actual precision reduction.
+
+    :param x: a Pandas series (a column) to convert for dtype precision reduction.
     """
     col_name = x.name
     col_type = x.dtype
@@ -73,10 +74,9 @@ def _reduce_precision(x
         # if the category ratio is smaller than default thresholds, then make the column a categorical
         # a high level attempt to strike a balance when making columns categorical or not
         try:
-            # return normal categories, i.e. avoid "dog" and "Dog" as different categories
+            # if string, return normal categories, i.e. avoid "dog" and "Dog" as different categories
             x = x.str.title()
-        except:
-            # TODO: conform to PEP and avoid naked except statement
+        except AttributeError:
             pass
 
         x = pd.Categorical(x)

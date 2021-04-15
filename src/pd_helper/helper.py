@@ -153,15 +153,15 @@ def optimize(df
         logging.info('Starting optimization process in series.')
         logging.info('Optimization can be run in parallel with multiprocessing'
                      ', set enable_mp to True and see function params.')
-
-        df[cols_to_convert] = df[cols_to_convert].apply(lambda x: _reduce_precision(x
-                                                                                    , date_strings=date_strings
-                                                                                    , bool_types=bool_types
-                                                                                    , categorical_ratio=categorical_ratio
-                                                                                    , categorical_threshold=categorical_threshold
-                                                                                    , final_default_dtype=final_default_dtype
-                                                                                    , enable_mp=enable_mp
-                                                                                    ))
+        df[cols_to_convert] = df[cols_to_convert].apply(lambda x: _reduce_precision_(x))
+        # df[cols_to_convert] = df[cols_to_convert].apply(lambda x: _reduce_precision(x
+        #                                                                             , date_strings=date_strings
+        #                                                                             , bool_types=bool_types
+        #                                                                             , categorical_ratio=categorical_ratio
+        #                                                                             , categorical_threshold=categorical_threshold
+        #                                                                             , final_default_dtype=final_default_dtype
+        #                                                                             , enable_mp=enable_mp
+        #                                                                             ))
 
     logging.info(f'Converted DF with new dtypes as follows:\n{df.dtypes}')
     end_mem = _mem_usage(df)

@@ -22,6 +22,3 @@ def _configuration(echo=False):
 
     if echo:
         logger.info("Logging configured.")
-
-
-
