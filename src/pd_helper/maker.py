@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import numpy.lib.recfunctions as rfn
 
-import os
-import uuid
 import shortuuid
 import random
 
@@ -34,8 +32,7 @@ class MakeData:
         self.shuffle = shuffle
 
         def make_random_dates(start, end, n):
-            """
-            Return random dates to populate datetime columns.
+            """Return random dates to populate datetime columns.
 
             :param start: A string date like '2010-01-01', should be less than end date
             :param end: A string date like '2020-01-01', should be greater than start date
@@ -53,18 +50,19 @@ class MakeData:
         self.make_random_dates = make_random_dates
 
     def make_df(self, perfect=False, size=100000, datetime_start="2020-01-01", datetime_end="2020-12-31"):
-        """
-        Generate randomly imperfect DataFrame for testing things with some controlled parameters.
+        """Generate randomly imperfect DataFrame for testing things with some controlled parameters.
 
-        :params
-        ----------
 
-        perfect: bool, default False. If False, return DataFrame having purposefully random mistakes and oddities.
-        size: integer, default 100000. Set number of rows in dataframe.
-        datetime_start: a string, representing a calendar date of YYYY-MM-DD. The date to start generating dates.
-        datetime_end: a string, representing a calendar date of YYYY-MM-DD. The date to end generating dates.
-        ** datetime_start should be older (less than) than datetime_end
-        return: a dataframe of randomly generated data
+        :param perfect: bool, default False.
+                If False, return DataFrame having purposefully random mistakes and oddities.
+        :param size: integer, default 100000.
+                Set number of rows in dataframe.
+        :param datetime_start: a string, representing a calendar date of YYYY-MM-DD.
+                The date to start generating dates.
+        :param datetime_end: a string, representing a calendar date of YYYY-MM-DD.
+                The date to end generating dates.
+                ** datetime_start should be older (less than) than datetime_end
+        :return: a dataframe of randomly generated data
         """
 
         columns = ['Object ID'

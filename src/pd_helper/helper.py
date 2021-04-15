@@ -24,42 +24,40 @@ def optimize(df
              , final_default_dtype='string'
              , echo=False
              ):
-    """
-    Optimize a Pandas DataFrame by applying least precision to column dtypes.
+    """Optimize a Pandas DataFrame by applying least precision to column dtypes.
 
-    :params
-    ----------
-    df: DataFrame, Required
-        a pandas dataframe that needs optimization
-    parse_col_names: bool, default True
+    :param df: DataFrame, Required
+        A pandas dataframe that needs optimization
+    :param parse_col_names: bool, default True
         If passed, returns columns as lower case without spaces
-    enable_mp: bool, default to False
+    :param enable_mp: bool, default to False
         If passed, runs optimization on columns in parallel with multiprocessing
-    mp_processors: integer, default to None
+    :param mp_processors: integer, default to None
         If None, default to half of available processes from mp.cpu_count(), only effective if mp is enabled.
-    date_strings: list of string, default to None
+    :param date_strings: list of string, default to None
         If None, default to a list of strings that indicate date columns -> ['_date', 'date_']
-    exclude_cols: list of string, default to None
+    :param exclude_cols: list of string, default to None
         If None, default to a list of strings that indicate columns to exclude from optimization -> ['exclude_this_col', 'exclude_another_col'].
         Note, excluded columns are returned, just not run through the optimizer.
-    special_mappings: dictionary of {string: list of strings}, default to None
+    :param special_mappings: dictionary of {string: list of strings}, default to None
         Optional. If provided indicate a special mapping for col types with a dictionary, these are excluded from auto optimization.
         Note, the key is the desired dtype and the value is a list of column names.
-    bool_types: list of string, default to None
+    :param bool_types: list of string, default to None
         If None, default to a list of bool and semantic string values that indicate there is a boolean dtype such
         as True False, etc. -> [True, False, 'true', 'True', 'False', 'false']
-    categorical_ratio: float, default to None
+    :param categorical_ratio: float, default to None
         If None, default to .1 (10%). Evaluates the ratio of unique values in the column to determine if categorical dtype is worthwhile.
         Note, if cat ratio less than 10%, then, the column is assigned categorical.
-    categorical_threshold: integer, default to None
+    :param categorical_threshold: integer, default to None
         If None, default to 20. Evaluates the len() of unique values in a column to determine if categorical dtype is worthwhile.
         Note, if the number of unique values is less than 20, categorical dtype is assigned.
-    final_default_dtype: string, default to None
+    :param final_default_dtype: string, default to None
         If None, default to "string" dtype. This is the catch all dtype to assign if optimizer does not assign one by rule.
-    echo: bool, default to False.
+    :param echo: bool, default to False.
         If True, echo progress, show progress, and display metrics.
+    :return: df, an optimized Pandas DataFrame.
 
-    *Note when calling function with multiprocessing enabled, ensure that the function is called from a module such as:
+    *When calling function with multiprocessing enabled, ensure that the function is called from a module such as:
 
         if __name__ == "__main__":
             df = pd.DataFrame(<Some data here>)
@@ -84,8 +82,8 @@ def optimize(df
     # accommodate any special user-defined mappings
 
     def f(s, c):
-        """
-        A Helper Function to assigning special mappings
+        """A Helper Function to assigning special mappings.
+
         :param s: Pandas Series
         :param c: String
         :return: Pandas Series

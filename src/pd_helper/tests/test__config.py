@@ -25,7 +25,7 @@ class FakeDF:
         from src.pd_helper.maker import MakeData
         from src.pd_helper.utils._reduce_precision import _reduce_precision
         faker = MakeData()
-        self.df = faker.make_df()
+        self.df = faker.make_df(size=1000)
 
         # function params currently passed by parent by default
         date_strings = ['_date', 'date_']
